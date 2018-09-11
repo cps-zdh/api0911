@@ -1,46 +1,29 @@
 package test.com.sen.api;
 
-import com.alibaba.fastjson.JSON;
 import com.sen.api.beans.ApiDataBean;
-import com.sen.api.configs.ApiConfig;
 import com.sen.api.configs.Config;
-import com.sen.api.excepions.ErrorRespStatusException;
 import com.sen.api.listeners.AutoTestListener;
 import com.sen.api.listeners.RetryListener;
 import com.sen.api.utils.*;
+
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+
 import org.apache.http.Header;
-import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
 import org.apache.http.client.CookieStore;
-import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.*;
 import org.apache.http.conn.ClientConnectionManager;
-import org.apache.http.cookie.Cookie;
-import org.apache.http.entity.StringEntity;
-import org.apache.http.entity.mime.MultipartEntity;
-import org.apache.http.entity.mime.content.FileBody;
-import org.apache.http.entity.mime.content.StringBody;
-import org.apache.http.impl.client.AbstractHttpClient;
 import org.apache.http.impl.client.DefaultHttpClient;
 import org.apache.http.impl.conn.PoolingClientConnectionManager;
 import org.apache.http.message.BasicHeader;
-import org.apache.http.params.CoreConnectionPNames;
-import org.apache.http.util.EntityUtils;
 import org.dom4j.DocumentException;
-import org.testng.Assert;
 import org.testng.ITestContext;
 import org.testng.annotations.*;
 import org.testng.annotations.Optional;
 
-import java.io.File;
-import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
-import java.nio.file.Paths;
-import java.util.*;
-import java.util.regex.Matcher;
-
-import javax.mail.MessagingException;
-import javax.mail.internet.AddressException;
 
 @Listeners({ AutoTestListener.class, RetryListener.class })
 public class ApiTest extends TestBase {
