@@ -115,6 +115,8 @@ public class ApiTest extends TestBase {
 			headers.add(header);
 		});
 		publicHeaders = headers.toArray(new Header[headers.size()]);
+		ReportUtil.log("===============公共信息头读取完毕=====================");
+		System.out.println("===============公共信息头读取完毕=====================");
 		
 	}
 
@@ -123,6 +125,9 @@ public class ApiTest extends TestBase {
 	public void readData(@Optional("case/api-data.xls") String excelPath, @Optional("Sheet1") String sheetName) throws DocumentException {
 		dataList = readExcelData(ApiDataBean.class, excelPath.split(";"),
 				sheetName.split(";"));
+		ReportUtil.log("===============获取excel信息=====================");
+		System.out.println("===============获取excel信息=====================");
+		
 	}
 
 	//TODO 实体excel变化，对于apidata这种咋写
@@ -135,6 +140,8 @@ public class ApiTest extends TestBase {
 	@DataProvider(name = "cpsDatas")
 	public Iterator<Object[]> getApiData(ITestContext context)
 			throws DocumentException {
+		ReportUtil.log("===============返回数据驱动=====================");
+		System.out.println("===============返回数据驱动=====================");
 		return getRunList(dataList);
 	}
 
