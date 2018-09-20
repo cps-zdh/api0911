@@ -359,7 +359,8 @@ public class TestBase {
 	 * @throws DocumentException 
 	 */
 	protected Config getConfig(String pathName) throws DocumentException {
-		String configFilePath = Paths.get(System.getProperty("user.dir"), pathName).toString();
+		File configFile = new File("api-config.xml");
+		String configFilePath = configFile.getAbsolutePath();
 		ReportUtil.log("api config path:" + configFilePath);
 		System.out.println("api config path:" +configFilePath);
 		Config config = new Config(configFilePath);
