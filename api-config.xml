@@ -4,7 +4,7 @@
 	<!-- 测试环境配置 -->
 		<environment>
 			<description>线下crm自动化环境</description>
-			<rootUrl>http://192.168.10.201/djcrm</rootUrl>
+			<rootUrl>http://192.168.23.153/djcrm</rootUrl>
 		    <headers>
 		        <!-- 默认json传至方式 -->
 		    </headers>
@@ -18,7 +18,7 @@
 		
 		<environment>
 			<description>线下团购自动化环境</description>
-			  <rootUrl>http://192.168.10.202</rootUrl>
+			  <rootUrl>http://192.168.23.145</rootUrl>
 		    <headers>
 		        <!-- 默认json传至方式 -->
 		    </headers>
@@ -31,7 +31,7 @@
 		
 	</environments>
 	<!-- 线下crm环境 -->
-    <rootUrl>http://192.168.10.201/djcrm</rootUrl>
+    <rootUrl>http://192.168.23.157/djcrm</rootUrl>
     <headers>
         <!-- 配置为自己的参数 -->
     </headers>

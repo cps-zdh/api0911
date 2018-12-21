@@ -11,11 +11,11 @@
 					<include name="tgTest"></include>
 				</methods>
 			</class>	
-			<class name="test.com.sen.api.ApiTest">
+			<!--<class name="test.com.sen.api.ApiTest">
 				<methods>							
 					<include name="apiTest"></include>
 				</methods>
-			</class>	
+			</class>	-->
 		</classes>
 	</test>
 	<listeners>	

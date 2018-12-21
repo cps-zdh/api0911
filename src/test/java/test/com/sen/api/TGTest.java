@@ -18,6 +18,8 @@ import org.testng.annotations.*;
 import org.testng.annotations.Optional;
 import java.util.*;
 
+
+
 /**
  * 
  * @description 团购接口测试--测试框架使用
@@ -63,6 +65,8 @@ public class TGTest extends TestBase{
 	    DefaultHttpClient client = new DefaultHttpClient(connManager);
 		ReportUtil.log("--- API test start ---");
 		checkSleep(apiDataBean);
+		//请求之前先连库查数据并存储到公共变量池，供调用
+		saveDatasBySql(apiDataBean.getSql());
 		String apiParam = buildRequestParam(apiDataBean);
 		// 封装请求方法
 		HttpUriRequest method = parseHttpRequest(apiDataBean.getUrl(),

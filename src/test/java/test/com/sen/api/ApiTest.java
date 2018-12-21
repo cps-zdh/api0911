@@ -83,6 +83,7 @@ public class ApiTest extends TestBase {
 			method.abort();
 		}
 		verify(responseData, apiDataBean);
+
 	}
 
 	/**

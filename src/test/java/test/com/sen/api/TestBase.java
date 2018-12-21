@@ -13,6 +13,7 @@ import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
+import com.sen.api.utils.*;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -37,14 +38,6 @@ import com.alibaba.fastjson.JSONPath;
 import com.sen.api.beans.ApiDataBean;
 import com.sen.api.beans.BaseBean;
 import com.sen.api.configs.Config;
-import com.sen.api.utils.AssertUtil;
-import com.sen.api.utils.ExcelUtil;
-import com.sen.api.utils.FileUtil;
-import com.sen.api.utils.FunctionUtil;
-import com.sen.api.utils.RandomUtil;
-import com.sen.api.utils.ReportUtil;
-import com.sen.api.utils.SSLClient;
-import com.sen.api.utils.StringUtil;
 
 public class TestBase {
 
@@ -81,7 +74,6 @@ public class TestBase {
 	/**
 	 * 组件预参数（处理__fucn()以及${xxxx}）
 	 * 
-	 * @param apiDataBean
 	 * @return
 	 */
 	protected String buildParam(String param) {
@@ -277,15 +269,11 @@ public class TestBase {
 
 	/**
 	 * 根据配置读取测试用例
-	 * 
+	 *
 	 * @param clz
 	 *            需要转换的类
-	 * @param excelPaths
 	 *            所有excel的路径配置
-	 * @param excelName
 	 *            本次需要过滤的excel文件名
-	 * @param sheetName
-	 *            本次需要过滤的sheet名
 	 * @return 返回数据
 	 * @throws DocumentException
 	 */
@@ -535,5 +523,45 @@ public class TestBase {
 				apiDataBean.isContains());
 		// 对返回结果进行提取保存。
 		saveResult(responseData, apiDataBean.getSave());
+	}
+
+	/**
+	 * 连接数据库查询，并保存参数到公共变量池
+	 * @param saveDatasSql
+	 */
+	protected void saveDatasBySql(String saveDatasSql){
+		MysqlUtil mysql=new MysqlUtil();
+		if(saveDatasSql =="" || saveDatasSql ==null){
+			return;
+		}
+		String[] saves=saveDatasSql.split(";");
+		for(String save:saves){
+			Pattern pattern = Pattern.compile("\\[(.*?)\\]=(.+)");
+			Matcher m = pattern.matcher(save.trim());
+			String[] keys;
+			String sql;
+			List<Map<String,String>> list=new ArrayList<Map<String,String>>();
+			Map<String,String> map=new HashMap<String,String>();
+			while(m.find()){
+				keys=m.group(1).split(",");
+				sql=m.group(2);
+				//连接数据库查询数据，结果存放在List中，关闭连接
+				mysql.connect();
+				list=mysql.selectSql(sql,keys);
+				mysql.close();
+				//取第一条数据
+				map=list.get(0);
+				for (String k:keys){
+					saveDatas.put(k,map.get(k));
+				}
+			}
+		}
+
+	}
+
+	public static void main(String[] args) {
+		TestBase t=new TestBase();
+		t.saveDatasBySql("[fphone,fmsg]=SELECT * FROM t_push_phonemsg ph LEFT JOIN t_push_msg pm ON ph.fmsgid = pm.fid WHERE ph.fphone='17826826147'");
+		System.out.println(TestBase.saveDatas);
 	}
 }

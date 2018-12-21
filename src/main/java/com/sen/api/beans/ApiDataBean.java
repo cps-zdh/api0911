@@ -19,6 +19,17 @@ public class ApiDataBean extends BaseBean {
 	private String save;
 	private String preParam;
 	private int sleep;
+	private String sql;
+
+	public String getSql() {
+		return sql;
+	}
+
+	public void setSql(String sql) {
+		this.sql = sql;
+	}
+
+
 
 	public boolean isRun() {
 		return run;
