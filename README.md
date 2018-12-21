@@ -50,11 +50,15 @@
 该api测试用例的请求路径。
 - param：
 请求方法为post时，body的内容（暂只支持json,不支持xml）。上传时请类似为：{"param1":"valu1","file":"__bodyfile(文件相对路径)"}
+- preParam:
+在请求之前可执行存储参数的操作
 - verify：
 对于api请求response数据的验证（可使用jsonPath进行校验）。校验多个使用“；”进行隔开。
 - save：
 使用jsonPath对response的数据进行提取存储。
-
+- sql:
+支持数据库查询并存储数据到公共变量池，格式：[key1,key2,[...]]=sql1;[key1,key2,[...]]=sql2 ，其中key要和表字段名一致，默认使用该变量名存储到公共变量池，一次可执行多条sql及存储多个字段的值
+例：[id,name]=select id,name from t_user,通过${id},${name}调用
 - 说明：
 1. 若配置文件(api-config.xml)中rootUrl为"http://apis.baidu.com" ，url的值为：“/apistore/aqiservice/citylist”，框架执行的时候会根据配置文件中rootUrl进行自动拼接为：http://apis.baidu.com/apistore/aqiservice/citylist 。
 若填写url填写为http作为前缀的值如：“http://www.baidu.com/s?w=test” 将不会进行拼接。
@@ -96,6 +100,7 @@ username=$.username;id=$.userId
 - __plus(params...)将所有参数进行相加。//参数中其中有一个包含小数点将会返回带小数点的值
 - __multi(params...)将所有参数相乘。
 - __bodyfile()：。
+- __regex(param1,param2,param3):正则表达式匹配字符串。param1:正则表达式，param2:目标字符串，param3：若有组匹配，则代表下标  m.group(param3)
 
 ```
 //若param中值为：
@@ -107,6 +112,5 @@ username=$.username;id=$.userId
 
 - 支持xml
 - 支持auth
-- 支持delete，put等方法
-- 支持验证数据库
+- 支持文件上传格式接口
 - 待加+++++
