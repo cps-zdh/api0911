@@ -68,8 +68,8 @@ public class MysqlUtil {
      */
     public void close(){
         try {
-            conn.close();
             System.out.println("关闭数据库连接。。。");
+            conn.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }

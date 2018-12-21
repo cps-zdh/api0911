@@ -14,6 +14,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import com.sen.api.utils.*;
+import com.sun.javafx.robot.impl.FXRobotHelper;
 import org.apache.http.Header;
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -55,7 +56,7 @@ public class TestBase {
 	 * 截取自定义方法正则表达式：__xxx(ooo)
 	 */
 	protected Pattern funPattern = Pattern
-			.compile("__(\\w*?)\\((([\\w\\\\\\/:\\.\\$]*,?)*)\\)");// __(\\w*?)\\((((\\w*)|(\\w*,))*)\\)
+			.compile("__(.*?)\\((.*)\\)");// __(\w*?)\((([\w\\\/:\.\$]*,?)*)\)
 																	// __(\\w*?)\\(((\\w*,?\\w*)*)\\)
 
 	
@@ -546,9 +547,14 @@ public class TestBase {
 				keys=m.group(1).split(",");
 				sql=m.group(2);
 				//连接数据库查询数据，结果存放在List中，关闭连接
-				mysql.connect();
-				list=mysql.selectSql(sql,keys);
-				mysql.close();
+				try{
+					mysql.connect();
+					list=mysql.selectSql(sql,keys);
+				}catch (Exception e){
+					e.printStackTrace();
+				}finally {
+					mysql.close();
+				}
 				//取第一条数据
 				map=list.get(0);
 				for (String k:keys){
