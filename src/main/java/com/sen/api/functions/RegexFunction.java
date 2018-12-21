@@ -6,7 +6,7 @@ import java.util.regex.Pattern;
 /**
  * 正则表达式功能   __regex(regex,str,index)   从Str中匹配符合该正则的内容
  */
-public class Regex implements Function {
+public class RegexFunction implements Function {
     @Override
     public String execute(String[] args) {
         // 按指定模式在字符串查找
@@ -37,9 +37,5 @@ public class Regex implements Function {
         return "regex";
     }
 
-    public static void main(String[] args) {
-        Regex r=new Regex();
-        String[] strs={"[0-9]+","123","0"};
-        System.out.println(r.execute(strs));
-    }
+
 }
