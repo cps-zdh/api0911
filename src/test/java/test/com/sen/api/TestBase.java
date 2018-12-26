@@ -535,6 +535,7 @@ public class TestBase {
 		if(saveDatasSql =="" || saveDatasSql ==null){
 			return;
 		}
+		saveDatasSql=buildParam(saveDatasSql);
 		String[] saves=saveDatasSql.split(";");
 		for(String save:saves){
 			Pattern pattern = Pattern.compile("\\[(.*?)\\]=(.+)");
