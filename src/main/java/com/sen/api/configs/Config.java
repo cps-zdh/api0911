@@ -56,7 +56,7 @@ public class Config {
 				.elements("header");
 		for(Element header:headersElements) {
 			headers.put(header.attributeValue("name").trim(), 
-					header.attributeValue("value")).trim();
+					header.attributeValue("value").trim());
 		}
 		config.setHeaders(headers);
 	}
@@ -76,7 +76,7 @@ public class Config {
 			params.put(param.attributeValue("name").trim(), 
 					param.attributeValue("value").trim());
 		}
-		config.setHeaders(params);
+		config.setParams(params);
 	}
 
 
@@ -87,8 +87,8 @@ public class Config {
 	
 	public static void main(String[] args) throws DocumentException {
 		List<ConfigBean> list = new Config("api-config.xml").getConfigs();
-		System.out.println(list.get(0).getDescription());
-		System.out.println(list.get(0).getHeaders());
+		System.out.println(list.get(1).getDescription());
+		System.out.println(list.get(1).getHeaders());
 	}
 	
 	

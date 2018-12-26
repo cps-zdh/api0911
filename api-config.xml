@@ -18,13 +18,14 @@
 		
 		<environment>
 			<description>线下团购自动化环境</description>
-			  <rootUrl>http://192.168.23.145</rootUrl>
-		    <headers>
-		        <!-- 默认json传至方式 -->
-		    </headers>
+			<rootUrl>http://192.168.23.145/djgroupon</rootUrl>
+			<headers>
+				<!-- 默认json传至方式 -->
+				<header name="Cookie" value="citycode=3301;cpsFid=null"></header>
+			</headers>
 		    <params>
 		    	<param name="test" value="value"></param>
-		    	<param name="first_currency" value=""></param>
+		    	<param name="first_currency" value="1223333"></param>
 		    </params>
 		    <project_name>纸板团购接口自动化测试报告demo</project_name>
 		</environment>
@@ -37,7 +38,7 @@
     </headers>
     <params>
     	<param name="test" value="value"></param>
-    	<param name="first_currency" value=""></param>
+    	<param name="first_currency" value="1233444"></param>
     </params>
     <project_name>接口自动化测试报告demo</project_name>
 </root>
