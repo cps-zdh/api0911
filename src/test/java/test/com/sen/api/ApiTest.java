@@ -65,7 +65,7 @@ public class ApiTest extends TestBase {
 		checkSleep(apiDataBean);
 		String apiParam = buildRequestParam(apiDataBean);
 		// 封装请求方法
-		saveDatasBySql(apiDataBean.getSql());bai
+		saveDatasBySql(apiDataBean.getSql());
 		HttpUriRequest method = parseHttpRequest(apiDataBean.getUrl(),
 				apiDataBean.getMethod(), apiParam,rootUrl,rooUrlEndWithSlash
 				,publicHeaders,requestByFormData);
