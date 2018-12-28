@@ -462,7 +462,7 @@ public class TestBase {
 				Matcher m = funPattern.matcher(value);
 				if (m.matches() && m.group(1).equals("bodyfile")) {
 					value = m.group(2);
-					multiEntity.addPart(key, new FileBody(new File(value)));
+					multiEntity.addPart(key, new FileBody(new File(value)/*,"image/png","utf-8"*/));
 				} else {
 					multiEntity.addPart(key, new StringBody(paramMap.get(key)));
 				}

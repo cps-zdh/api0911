@@ -99,7 +99,7 @@ username=$.username;id=$.userId
 - __max(params...)获取所有参数的最大值。
 - __plus(params...)将所有参数进行相加。//参数中其中有一个包含小数点将会返回带小数点的值
 - __multi(params...)将所有参数相乘。
-- __bodyfile()：。
+- __bodyfile()：上传文件，格式为multipart/form-data,使用方式：{"key1":"value1","key2":"value2","files":"__bodyfile(C:\\Users\\djcps\\Desktop\\文件\\Blvb0OjxqL.png)"},调用方法为upload
 - __regex(param1,param2,param3):正则表达式匹配字符串。param1:正则表达式，param2:目标字符串，param3：若有组匹配，则代表下标  m.group(param3)
 
 ```
