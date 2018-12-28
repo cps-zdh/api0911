@@ -184,14 +184,24 @@ public class TestBase {
 			AssertUtil.contains(sourchData, allVerify);
 		} else {
 			// 通过';'分隔，通过jsonPath进行一一校验
-			Pattern pattern = Pattern.compile("([^;]*)=([^;]*)");
-			Matcher m = pattern.matcher(allVerify.trim());
-			while (m.find()) {
-				String actualValue = getBuildValue(sourchData, m.group(1));
-				String exceptValue = getBuildValue(sourchData, m.group(2));
+			Pattern pattern1= Pattern.compile("([^;]*)=([^;]*)");
+			Pattern pattern2 = Pattern.compile("([^;]*)!=([^;]*)");
+			Matcher m1 = pattern1.matcher(allVerify.trim());
+			Matcher m2 = pattern1.matcher(allVerify.trim());
+			while (m1.find()) {
+				String actualValue = getBuildValue(sourchData, m1.group(1));
+				String exceptValue = getBuildValue(sourchData, m1.group(2));
 				ReportUtil.log(String.format("验证转换后的值%s=%s", actualValue,
 						exceptValue));
 				Assert.assertEquals(actualValue, exceptValue, "验证预期结果失败。");
+			}
+
+			while (m2.find()) {
+				String actualValue = getBuildValue(sourchData, m2.group(1));
+				String exceptValue = getBuildValue(sourchData, m2.group(2));
+				ReportUtil.log(String.format("验证转换后的值%s=%s", actualValue,
+						exceptValue));
+				Assert.assertNotEquals(actualValue, exceptValue, "验证预期结果失败。");
 			}
 		}
 	}
@@ -568,7 +578,6 @@ public class TestBase {
 
 	public static void main(String[] args) {
 		TestBase t=new TestBase();
-		t.saveDatasBySql("[fphone,fmsg]=SELECT * FROM t_push_phonemsg ph LEFT JOIN t_push_msg pm ON ph.fmsgid = pm.fid WHERE ph.fphone='17826826147'");
-		System.out.println(TestBase.saveDatas);
+		System.out.println(t.getCommonParam("$.data=100"));
 	}
 }
