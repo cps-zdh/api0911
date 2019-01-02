@@ -37,5 +37,13 @@ public class RegexFunction implements Function {
         return "regex";
     }
 
+    public static void main(String[] args) {
+        Pattern r = Pattern.compile("([^;]*)=([^;]*)");
+        Matcher m=r.matcher("$.code=100000;$.success=true;$.data!null");
+        while(m.find()){
 
+            System.out.println(m.group(1));
+            System.out.println(m.group(2));
+        }
+    }
 }

@@ -187,8 +187,11 @@ public class TestBase {
 			Pattern pattern1= Pattern.compile("([^;]*)=([^;]*)");
 			Pattern pattern2 = Pattern.compile("([^;]*)!=([^;]*)");
 			Matcher m1 = pattern1.matcher(allVerify.trim());
-			Matcher m2 = pattern1.matcher(allVerify.trim());
+			Matcher m2 = pattern2.matcher(allVerify.trim());
 			while (m1.find()) {
+				if(m1.group(1).contains("!")){
+					break;
+				}
 				String actualValue = getBuildValue(sourchData, m1.group(1));
 				String exceptValue = getBuildValue(sourchData, m1.group(2));
 				ReportUtil.log(String.format("验证转换后的值%s=%s", actualValue,
@@ -199,7 +202,7 @@ public class TestBase {
 			while (m2.find()) {
 				String actualValue = getBuildValue(sourchData, m2.group(1));
 				String exceptValue = getBuildValue(sourchData, m2.group(2));
-				ReportUtil.log(String.format("验证转换后的值%s=%s", actualValue,
+				ReportUtil.log(String.format("验证转换后的值%s!=%s", actualValue,
 						exceptValue));
 				Assert.assertNotEquals(actualValue, exceptValue, "验证预期结果失败。");
 			}
@@ -577,7 +580,7 @@ public class TestBase {
 	}
 
 	public static void main(String[] args) {
-		TestBase t=new TestBase();
-		System.out.println(t.getCommonParam("$.data=100"));
+		File f=new File("files/sun1.png");
+		System.out.println(f.exists());
 	}
 }
