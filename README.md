@@ -112,5 +112,4 @@ username=$.username;id=$.userId
 
 - 支持xml
 - 支持auth
-- 支持文件上传格式接口
 - 待加+++++
